@@ -1,33 +1,26 @@
 import mongoose from 'mongoose';
 
-import bcrypt from 'bcryptjs';
-
-const userSchema = new mongoose.Schema(
-	{
-		username: {
-			type: String,
-			required: true,
-			unique: true,
-		},
-		email: {
-			type: String,
-			required: true,
-			unique: true,
-		},
-		password: {
-			type: String,
-			required: true,
-			minlegth: 6,
-		},
-		profileImage: {
-			type: String,
-			default: '',
-		},
+const userSchema = new mongoose.Schema({
+	username: {
+		type: String,
+		required: true,
+		unique: true,
 	},
-	{
-		timestamps: true,
-	}
-);
+	email: {
+		type: String,
+		required: true,
+		unique: true,
+	},
+	phone: {
+		type: String,
+		required: true,
+	},
+	password: {
+		type: String,
+		required: true,
+		minlegth: 6,
+	},
+});
 
 const User = mongoose.model('User', userSchema);
 

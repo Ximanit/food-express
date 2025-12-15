@@ -1,72 +1,55 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 
 import User from '../models/User.js';
 
-import 'dotenv/config';
-
 const router = express.Router();
-
-const generateToken = (userId) => {
-	jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '15d' });
-};
 
 router.post('/register', async (req, res) => {
 	try {
-		const { email, username, password } = req.body;
+		const { username, email, phone, password } = req.body;
 
 		if (!username || !email || !password) {
-			return res.status(400).json({ message: 'All fields are required' });
+			return res.status(400).json({ message: 'Заполните все поля!' });
 		}
 
 		if (password.length < 6) {
 			return res
 				.status(400)
-				.json({ message: 'Password should be at least 6 characters long' });
+				.json({ message: 'Пароль должен быть нее менее 6 символов' });
 		}
 
-		if (username.length < 3) {
-			return res
-				.status(400)
-				.json({ message: 'Username should be at least 3 characters long' });
-		}
-
-		// check if user already exists
 		const existingEmail = await User.findOne({ email });
 		if (existingEmail) {
-			return res.status(400).json({ message: 'Email already exists' });
+			return res.status(400).json({ message: 'Данная почта уже используется' });
 		}
 
 		const existingUsername = await User.findOne({ username });
 		if (existingUsername) {
-			return res.status(400).json({ message: 'Username already exists' });
+			return res
+				.status(400)
+				.json({ message: 'Данное имя пользователя уже используется' });
 		}
 
-		const profileImage = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
-
 		const user = new User({
-			email,
 			username,
+			email,
+			phone,
 			password,
-			profileImage,
 		});
 
 		await user.save();
 
-		const token = generateToken(user._id);
-
 		res.status(201).json({
-			token,
 			user: {
 				id: user._id,
 				username: user.username,
 				email: user.email,
-				profileImage: user.profileImage,
+				phone: user.phone,
 			},
 		});
 	} catch (error) {
-		console.log('Error in register route', error);
-		res.status(500).json({ message: 'Iternal server errror' });
+		console.log('Ошибка регистрации', error);
+		res.status(500).json({ message: 'Ошибка сервера. Попробуйте позже' });
 	}
 });
 
@@ -75,33 +58,31 @@ router.post('/login', async (req, res) => {
 		const { email, password } = req.body;
 
 		if (!email || !password) {
-			return res.status(400).json({ message: 'All fields are required' });
+			return res.status(400).json({ message: 'Заполните все поля!' });
 		}
 
 		const user = User.findOne({ email });
 		if (!user) {
-			return res.status(400).json({ message: 'Invalid credentials' });
+			return res
+				.status(400)
+				.json({ message: 'Пользователь с таким логином не найден' });
 		}
 
 		const isPasswordCorrect = await user.comparePassord(password);
 		if (!isPasswordCorrect) {
-			return res.status(400).json({ message: 'Invalid credentials' });
+			return res.status(400).json({ message: 'Пароль неправильный' });
 		}
 
-		const token = generateToken(user._id);
-
 		res.status(200).json({
-			token,
 			user: {
 				id: user._id,
 				username: user.username,
 				email: user.email,
-				profileImage: user.profileImage,
 			},
 		});
 	} catch (error) {
-		console.log('Error in login route', error);
-		res.status(500).json({ message: 'Iternal server errror' });
+		console.log('Ошибка авторизации', error);
+		res.status(500).json({ message: 'Ошибка сервера. Попробуйте позже' });
 	}
 });
 

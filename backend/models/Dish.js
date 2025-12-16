@@ -18,9 +18,11 @@ const dishSchema = new mongoose.Schema({
 		required: true,
 	},
 	rating: {
-		type: Double,
+		type: Number,
 		required: true,
-		minlegth: 6,
+		min: 0,
+		max: 5,
+		default: 0,
 	},
 });
 

@@ -61,16 +61,11 @@ router.post('/login', async (req, res) => {
 			return res.status(400).json({ message: 'Заполните все поля!' });
 		}
 
-		const user = User.findOne({ email });
+		const user = await User.findOne({ email });
 		if (!user) {
 			return res
 				.status(400)
 				.json({ message: 'Пользователь с таким логином не найден' });
-		}
-
-		const isPasswordCorrect = await user.comparePassord(password);
-		if (!isPasswordCorrect) {
-			return res.status(400).json({ message: 'Пароль неправильный' });
 		}
 
 		res.status(200).json({

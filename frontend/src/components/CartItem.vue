@@ -1,6 +1,6 @@
 <template>
   <div class="cart-item">
-    <img :src="image" :alt="title" class="item-img" />
+    <img src="/image/pizza-card.jpg" :alt="title" class="item-img" />
     <div class="item-info">
       <div class="item-title">{{ title }}</div>
       <div class="item-desc">{{ description }}</div>

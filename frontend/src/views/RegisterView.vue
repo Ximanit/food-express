@@ -7,8 +7,14 @@
         <p>Заполните форму для регистрации</p>
         <form class="auth-form" @submit.prevent="submitRegister">
           <div class="form-group">
-            <label for="name">Имя</label>
-            <input v-model="form.name" type="text" id="name" placeholder="Иванов Иван" required />
+            <label for="username">Имя</label>
+            <input
+              v-model="form.username"
+              type="text"
+              id="username"
+              placeholder="Иванов Иван"
+              required
+            />
           </div>
           <div class="form-group">
             <label for="email">Email</label>

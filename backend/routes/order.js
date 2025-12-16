@@ -1,6 +1,6 @@
 import express from 'express';
 
-import Order from '../models/Order';
+import Order from '../models/Order.js';
 
 const router = express.Router();
 
@@ -55,3 +55,5 @@ router.delete('/:id', async (req, res) => {
 		res.status(404).json({ message: err.message });
 	}
 });
+
+export default router;

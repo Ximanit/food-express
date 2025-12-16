@@ -1,16 +1,28 @@
 <template>
   <Header />
   <main>
-    <!-- Категории можно захардкодить или загрузить отдельно -->
     <section>
       <h2>Категории</h2>
       <div class="categories">
-        <div class="category-card"><img src="/image/pizza.png" alt="Пицца" />Пицца</div>
-        <div class="category-card"><img src="/image/burger.png" alt="Бургеры" />Бургеры</div>
-        <div class="category-card"><img src="/image/sup.png" alt="Супы" />Супы</div>
-        <div class="category-card"><img src="/image/salat.png" alt="Салаты" />Салаты</div>
-        <div class="category-card"><img src="/image/desert.png" alt="Десерты" />Десерты</div>
-        <div class="category-card"><img src="/image/drink.png" alt="Напитки" />Напитки</div>
+        <div class="category-card">
+          <img src="/image/pizza.png" alt="Пицца" class="category-img" />
+          Пицца
+        </div>
+        <div class="category-card">
+          <img src="/image/burger.png" class="category-img" alt="Бургеры" />Бургеры
+        </div>
+        <div class="category-card">
+          <img src="/image/sup.png" class="category-img" alt="Супы" />Супы
+        </div>
+        <div class="category-card">
+          <img src="/image/salat.png" class="category-img" alt="Салаты" />Салаты
+        </div>
+        <div class="category-card">
+          <img src="/image/desert.png" class="category-img" alt="Десерты" />Десерты
+        </div>
+        <div class="category-card">
+          <img src="/image/drink.png" class="category-img" alt="Напитки" />Напитки
+        </div>
       </div>
     </section>
 

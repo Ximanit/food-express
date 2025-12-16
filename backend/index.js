@@ -1,4 +1,6 @@
 import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
 import 'dotenv/config';
 
 import authRouter from './routes/auth.js';
@@ -7,10 +9,11 @@ import dishRouter from './routes/dish.js';
 import orderRouter from './routes/order.js';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const DB_URI = process.env.DB_URI;
 
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);

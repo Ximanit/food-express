@@ -3,10 +3,9 @@ import Dish from '../models/Dish.js';
 
 const router = express.Router();
 
-
 router.get('/', async (req, res) => {
 	try {
-		const dishes = await Dish.find(); 
+		const dishes = await Dish.find();
 		res.status(200).json(dishes);
 	} catch (error) {
 		console.error('Ошибка при получении блюд:', error);
@@ -17,7 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	const { id } = req.params;
 	try {
-		const dish = await Dish.findById(id); /
+		const dish = await Dish.findById(id);
 		if (!dish) {
 			return res.status(404).json({ message: 'Блюдо не найдено' });
 		}
@@ -28,12 +27,35 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
+router.post('/', async (req, res) => {
+	try {
+		const { name, compound, category, price, rating } = req.body;
+
+		const dish = new Dish({
+			name,
+			compound,
+			category,
+			price,
+			rating,
+		});
+
+		await dish.save();
+
+		res.status(201).json({
+			dish,
+		});
+	} catch (error) {
+		console.log('Ошибка регистрации', error);
+		res.status(500).json({ message: 'Ошибка сервера. Попробуйте позже' });
+	}
+});
+
 router.put('/:id', async (req, res) => {
 	const { id } = req.params;
 	const updates = req.body;
 
 	try {
-		const dish = await Dish.findByIdAndUpdate(id, updates, );
+		const dish = await Dish.findByIdAndUpdate(id, updates);
 
 		if (!dish) {
 			return res.status(404).json({ message: 'Блюдо не найдено' });

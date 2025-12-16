@@ -11,7 +11,13 @@
         <i class="fas fa-search"></i>
       </div>
       <div class="header-icons">
-        <router-link to="/cart"><i class="fas fa-shopping-cart"></i></router-link>
+        <router-link v-if="currentRoute !== '/cart'" to="/cart">
+          <i class="fas fa-shopping-cart"></i>
+        </router-link>
+        <router-link v-else to="/">
+          <i class="fas fa-home"></i>
+        </router-link>
+
         <a href="#" @click.prevent="handleAuthClick">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </a>
@@ -22,10 +28,14 @@
 
 <script setup>
 import { useAuthStore } from "@/stores/auth";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { computed } from "vue";
 
 const auth = useAuthStore();
 const router = useRouter();
+const route = useRoute();
+
+const currentRoute = computed(() => route.path);
 
 const handleAuthClick = () => {
   if (auth.isAuthenticated) {

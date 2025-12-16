@@ -2,26 +2,7 @@ import { defineStore } from "pinia";
 
 export const useCartStore = defineStore("cart", {
   state: () => ({
-    items: [
-      // Пример данных для демонстрации
-      {
-        id: 1,
-        title: "Пепперони",
-        desc: "Томатная паста, сыр моцарелла, сырокопчёная колбаса",
-        price: 550,
-        quantity: 2,
-        img: "/image/pizza-card.jpg",
-      },
-      {
-        id: 2,
-        title: "Пепперони",
-        desc: "Томатная паста, сыр моцарелла, сырокопчёная колбаса",
-        price: 550,
-        quantity: 2,
-        img: "/image/pizza-card.jpg",
-      },
-      // добавьте ещё по необходимости
-    ],
+    items: [],
   }),
   getters: {
     totalPrice: (state) => state.items.reduce((sum, item) => sum + item.price * item.quantity, 0),

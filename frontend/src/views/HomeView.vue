@@ -36,7 +36,6 @@
 <script setup>
 import { onMounted } from "vue";
 import Header from "@/components/Header.vue";
-import CategoryCard from "@/components/CategoryCard.vue";
 import DishCard from "@/components/DishCard.vue";
 import { useDishStore } from "@/stores/dish";
 import { useCartStore } from "@/stores/cart";

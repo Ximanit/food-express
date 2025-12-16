@@ -2,7 +2,7 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <img src="/image/logo.svg" alt="FoodExpress" class="logo-img" />
+        <img src="/logo.svg" alt="FoodExpress" class="logo-img" />
         Доставка экспресс
       </div>
       <div class="address">Ул. Доставки, 34</div>

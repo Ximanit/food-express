@@ -1,21 +1,23 @@
 import express from 'express';
 import 'dotenv/config';
-import cors from 'cors';
 
-import authRouter from './routes/authRoutes.js';
-import bookRouter from './routes/bookRoutes.js';
-import { connetDB } from './lib/db.js';
+import authRouter from './routes/auth.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const DB_URI = process.env.DB_URI;
 
 app.use(express.json());
-app.use(cors());
 
 app.use('/api/auth', authRouter);
-app.use('/api/books', bookRouter);
 
-app.listen(PORT, () => {
-	console.log(`server runnig on port ${PORT}`);
-	connetDB();
-});
+const start = async () => {
+	try {
+		await mongoose.connect(DB_URI).then(console.log('database connection'));
+		app.listen(PORT, () => console.log(`server started on port ${PORT}`));
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+start();

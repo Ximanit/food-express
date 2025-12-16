@@ -15,7 +15,7 @@ export const useAuthStore = defineStore("auth", {
     },
     async login(credentials) {
       const response = await api.post("/auth/login", credentials);
-      this.user = response.data.user;
+      this.user = response.data.user; // здесь должен быть id
       this.isAuthenticated = true;
       return response.data;
     },
@@ -24,5 +24,5 @@ export const useAuthStore = defineStore("auth", {
       this.isAuthenticated = false;
     },
   },
-  persist: true, // опционально: npm install pinia-plugin-persistedstate
+  persist: true,
 });

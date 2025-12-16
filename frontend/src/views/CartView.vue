@@ -23,12 +23,42 @@ import Header from "@/components/Header.vue";
 import CartItem from "@/components/CartItem.vue";
 import OrderSummary from "@/components/OrderSummary.vue";
 import { useCartStore } from "@/stores/cart";
+import { useAuthStore } from "@/stores/auth"; // ← добавь импорт
+import api from "@/api/api";
 
 const cart = useCartStore();
+const auth = useAuthStore(); // ← получаем store
 
-const handleCheckout = () => {
-  console.log("Оформление заказа на сумму:", cart.totalPrice);
-  // Здесь будет переход к оплате или вызов API
+const handleCheckout = async () => {
+  if (cart.items.length === 0) {
+    alert("Корзина пуста!");
+    return;
+  }
+
+  try {
+    const payload = {
+      items: cart.items.map((item) => ({
+        title: item.title,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      total: cart.totalPrice,
+      address: "Ул. Доставки, 34", // потом можно сделать форму
+    };
+
+    // Если пользователь авторизован — добавляем его ID
+    if (auth.isAuthenticated && auth.user?.id) {
+      payload.userId = auth.user.id;
+    }
+
+    await api.post("/order", payload);
+
+    alert("Заказ успешно оформлен!");
+    cart.items = []; // очищаем корзину
+  } catch (error) {
+    console.error(error);
+    alert(error.response?.data?.message || "Ошибка при оформлении заказа");
+  }
 };
 </script>
 

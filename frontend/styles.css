@@ -508,3 +508,44 @@ h2 {
   font-weight: 700;
   color: #ff6b35;
 }
+
+.dish-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.dish-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.add-btn {
+  transition: all 0.3s ease;
+}
+.add-btn:hover {
+  background: #e55a2b;
+  transform: scale(1.1);
+}
+
+.add-btn:active {
+  transform: scale(0.95);
+}
+
+.cart-icon {
+  position: relative;
+  display: inline-block;
+}
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff6b35;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

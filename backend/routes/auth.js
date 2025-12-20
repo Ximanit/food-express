@@ -47,8 +47,8 @@ router.post('/register', async (req, res) => {
 				phone: user.phone,
 			},
 		});
-	} catch (error) {
-		console.log('Ошибка регистрации', error);
+	} catch (err) {
+		console.log('Ошибка регистрации', err);
 		res.status(500).json({ message: 'Ошибка сервера' });
 	}
 });
@@ -72,8 +72,8 @@ router.post('/login', async (req, res) => {
 				email: user.email,
 			},
 		});
-	} catch (error) {
-		console.log('Ошибка авторизации', error);
+	} catch (err) {
+		console.log('Ошибка авторизации', err);
 		res.status(500).json({ message: 'Ошибка сервера' });
 	}
 });

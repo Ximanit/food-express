@@ -7,8 +7,8 @@ router.get('/', async (req, res) => {
 	try {
 		const dishes = await Dish.find();
 		res.status(200).json(dishes);
-	} catch (error) {
-		console.error('Ошибка при получении блюд:', error);
+	} catch (err) {
+		console.error('Ошибка при получении блюд:', err);
 		res.status(500).json({ message: 'Ошибка сервера при загрузке блюд' });
 	}
 });
@@ -44,8 +44,8 @@ router.post('/', async (req, res) => {
 		res.status(201).json({
 			dish,
 		});
-	} catch (error) {
-		console.log('Ошибка регистрации', error);
+	} catch (err) {
+		console.log('Ошибка регистрации', err);
 		res.status(500).json({ message: 'Ошибка сервера. Попробуйте позже' });
 	}
 });

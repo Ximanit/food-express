@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 		const order = await Order.find();
 
 		res.status(200).json(order);
-	} catch (error) {
+	} catch (err) {
 		res.status(400).json({
 			message: err.message,
 		});
@@ -54,8 +54,8 @@ router.post('/', async (req, res) => {
 			message: 'Заказ успешно оформлен!',
 			order: order,
 		});
-	} catch (error) {
-		console.error('Ошибка создания заказа:', error);
+	} catch (err) {
+		console.error('Ошибка создания заказа:', err);
 		res.status(500).json({ message: 'Ошибка сервера при оформлении заказа' });
 	}
 });

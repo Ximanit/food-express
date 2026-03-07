@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://food-express-nsof.onrender.com/api", // или ваш продакшн URL
+  baseURL: "https://food-express-nsof.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },
